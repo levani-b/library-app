@@ -24,3 +24,52 @@ window.addEventListener('keydown',(e)=>{
     if(e.key === "Escape") closeModal();
 });
 
+// add books
+const submitBtn = document.querySelector('.submit-btn');
+
+let library = [];
+
+function Book(title, author, pages, read){
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+}
+
+function renderInfo(){
+    let libraryEl = document.querySelector(".library");
+    libraryEl.innerHTML = '';
+    for(let i = 0; i<library.length; i++){
+       let book = library[i];
+       let bookEl = document.createElement("div");
+       bookEl.innerHTML = `
+       <div class="book-container">
+            <p class="book-name">${book.title}</p>
+            <p class="book-author">${book.author}</p>
+            <p class="book-pages">${book.pages}</p>
+            <button class="read">${book.read? "Read":"Not Read"}</button>
+            <button class="remove" onclick="removeBook(${i})>Remove</button>
+        </div>
+        `;
+        libraryEl.appendChild(bookEl);
+    }
+}
+function removeBook(index){
+    library.splice(index, 1);
+    renderInfo();
+}
+
+
+
+function addBookToLibrary(){
+    let title = document.querySelector(".title").value;
+    let author = document.querySelector(".author").value;
+    let pages = document.querySelector(".pages").value;
+    let checkbox = document.querySelector("#checkbox").checked;
+    let newBook = new Book(title, author, pages, checkbox);
+    library.push(newBook);
+    renderInfo();   
+}
+
+
+submitBtn.addEventListener('click', addBookToLibrary);
