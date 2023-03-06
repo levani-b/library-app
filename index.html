@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/img/books.svg" class="head-icon">
+    <link rel="stylesheet" href="style.css">
+    <title>Library</title>
+</head>
+<body>
+    <nav class="nav-bar">
+        <h1>Library</h1>
+        <button>Log in</button>
+    </nav>
+    <div class="btn-cont">
+        <button id="add-book"><ion-icon name="add-circle-outline" class="add-icon"></ion-icon> Add Book</button>
+    </div>
+    <main>
+        <div class="book-container">
+            <p class="book-name">"john Wick"</p>
+            <p class="book-author">john wick</p>
+            <p class="book-pages">200 pages</p>
+            <button class="read">Read</button>
+            <button class="remove">Remove</button>
+        </div>
+       
+    </main>
+    <div class="modal">
+        <ion-icon name="close-circle" class="cross"></ion-icon>
+        <p class="add">Add New Book</p>
+        <input type="text" placeholder="Title" class="input title">
+        <input type="text" placeholder="Author" class="input author">
+        <input type="number" min="1" max="1000" placeholder="Pages" class="input Pages">
+        <div class="check">
+            <p>Have you read it?</p>
+            <input type="checkbox" name="" id="checkbox" class="checkbox">
+        </div>
+        <button class="submit-btn">Submit</button>
+    </div>
+    <div class="overlay"></div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
