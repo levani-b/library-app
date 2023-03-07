@@ -48,18 +48,11 @@ function renderInfo(){
             <p class="book-author">${book.author}</p>
             <p class="book-pages">${book.pages}</p>
             <button class="read">${book.read? "Read":"Not Read"}</button>
-            <button class="remove" onclick="removeBook(${i})>Remove</button>
         </div>
         `;
         libraryEl.appendChild(bookEl);
     }
 }
-function removeBook(index){
-    library.splice(index, 1);
-    renderInfo();
-}
-
-
 
 function addBookToLibrary(){
     let title = document.querySelector(".title").value;
