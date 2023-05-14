@@ -4,9 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Library</title>
 </head>
 <body>
-    
+    <header>
+        <h1>Library</h1>
+    </header>
+    <main>
+        <button class="btn btn-add" id="btn-add">+ Add Book</button>
+        <div class="books-container" id="books-container"></div>
+    </main>
+    <footer>
+    </footer>
+    <div class="modal" id="add-book-modal">
+        <form class="add-book-form" id="add-book-form">
+          <h3>Add new book</h3>
+          <input
+            class="input"
+            type="text"
+            id="title"
+            placeholder="Title"
+            required
+            maxlength="100"
+          />
+          <input
+            class="input"
+            type="text"
+            id="author"
+            placeholder="Author"
+            required
+            maxlength="100"
+          />
+          <input
+            class="input"
+            type="number"
+            id="pages"
+            placeholder="Pages"
+            required
+            min="0"
+            max="10000"
+          />
+          <div class="is-read">
+            <label for="is-read">Have you read it?</label>
+            <input class="checkbox" type="checkbox" id="is-read" />
+          </div>
+          <button class="btn btn-modal-submit" type="submit">Submit</button>
+        </form>
+      </div>
+      <div class="overlay" id="overlay"></div>
+    <script src="script.js"></script>
 </body>
 </html>
