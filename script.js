@@ -18,6 +18,7 @@ const bookTitle = document.getElementById('title');
 const bookAuthor = document.getElementById('author');
 const bookPages = document.getElementById('pages');
 const submitBtn = document.getElementById('submit-btn');
+const bookForm = document.getElementById('add-book-form');
 const bookContainer = document.getElementById('books-container');
 
 const getInfoFromInputs = (event) => {
@@ -71,6 +72,6 @@ const loadLibraryFromLocalStorage = () => {
       renderBooks();
     }
 }
-submitBtn.addEventListener('submit', getInfoFromInputs);
+bookForm.addEventListener('submit', getInfoFromInputs);
 window.addEventListener('load', loadLibraryFromLocalStorage);
 console.log(myLibrary);
