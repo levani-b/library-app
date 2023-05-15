@@ -97,6 +97,27 @@ a{
 a p{
     font-size: 2.2rem;
 }
+.book button{
+    width: 100%;
+    font-weight: 700;
+    font-size: 1.6rem;
+}
+.remove-btn:hover{
+    background-color: #d1d1d1;
+}
+
+.btn-red{
+    background-color: #ff8080;
+}
+.btn-red:hover{
+    background-color: #ff4d4d;
+}
+.btn-green{
+    background-color: #80c080;
+}
+.btn-green:hover{
+    background-color: #4da64d;
+}
 
 /* for modal */
 .modal{
@@ -172,10 +193,3 @@ h3{
     color: #1a1a1a;
 }
 
-
-.btn-red{
-    background-color: red;
-}
-.btn-green{
-    background-color: #008000;
-}

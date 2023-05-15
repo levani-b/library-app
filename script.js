@@ -92,11 +92,15 @@ const renderBooks = () => {
         const readBtn = document.createElement('button');
         readBtn.classList.add('btn');
 
+        const deleteBtn =document.createElement('button');
+        deleteBtn.classList.add('btn', 'remove-btn');
+        deleteBtn.textContent = 'Remove';
 
         bookElement.appendChild(titleOutput);
         bookElement.appendChild(authorOutput);
         bookElement.appendChild(pagesOutput);
         bookElement.appendChild(readBtn);
+        bookElement.appendChild(deleteBtn);
         
         updateButtonColor(readBtn, book);
         readBtn.addEventListener('click', () => {
