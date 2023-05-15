@@ -72,7 +72,7 @@ const getInfoFromInputs = (event) => {
 const renderBooks = () => {
     bookContainer.innerHTML = '';
 
-    myLibrary.forEach((book) => {
+    myLibrary.forEach((book,index) => {
         const bookElement = document.createElement('div');
         bookElement.classList.add('book');
 
@@ -95,6 +95,10 @@ const renderBooks = () => {
         const deleteBtn =document.createElement('button');
         deleteBtn.classList.add('btn', 'remove-btn');
         deleteBtn.textContent = 'Remove';
+
+        deleteBtn.addEventListener('click', ()=> {
+            deleteBook(index);
+        });
 
         bookElement.appendChild(titleOutput);
         bookElement.appendChild(authorOutput);
@@ -138,6 +142,11 @@ const loadLibraryFromLocalStorage = () => {
       myLibrary = JSON.parse(libraryData);
       renderBooks();
     }
+}
+const deleteBook = (index) => {
+    myLibrary.splice(index, 1);
+    saveLibraryToLocalStorage(); 
+    renderBooks();
 }
 
 bookForm.addEventListener('submit',getInfoFromInputs);
