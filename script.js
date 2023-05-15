@@ -42,12 +42,17 @@ const renderBooks = () => {
 
         const titleOutput = document.createElement('p');
         titleOutput.textContent = `Title : ${book.title}`;
+        titleOutput.classList.add('title');
 
         const authorOutput = document.createElement('p');
         authorOutput.textContent = `Author : ${book.author}`
+        authorOutput.classList.add('author');
+
 
         const pagesOutput = document.createElement('p')
         pagesOutput.textContent = `Pages : ${book.pages}`
+        pagesOutput.classList.add('pages');
+
 
         bookElement.appendChild(titleOutput);
         bookElement.appendChild(authorOutput);

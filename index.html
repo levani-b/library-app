@@ -4,20 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/books.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <title>Library</title>
 </head>
 <body>
     <header>
-        <h1>Library</h1>
-    </header>
-    <main>
+        <div class="head-cont">
+          <img src="img/books.png" alt="">
+          <h1>Library</h1>
+        </div>
+      </header>
+      <main>
         <button class="btn btn-add" id="btn-add">+ Add Book</button>
         <div class="books-container" id="books-container"></div>
     </main>
+    <div class="line"></div>
     <footer>
+      <a href="https://github.com/LBLBLBLBLBLB/Library-app" target="_blank"> 
+        <p>Levani B.</p>
+        <img src="/img/github.png" alt="github logo">
+      </a>
     </footer>
-    <div class="modal" id="add-book-modal">
+    <div class="modal" id="add-book-modal" style="display: none;">
         <form class="add-book-form" id="add-book-form">
           <h3>Add new book</h3>
           <input
