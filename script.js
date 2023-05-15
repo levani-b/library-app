@@ -1,5 +1,24 @@
 //modal wiindow
+const addButton = document.getElementById('btn-add');
+const modal = document.getElementById('add-book-modal');
+const overlay = document.getElementById('overlay');
 
+const openModal = () => {
+    modal.classList.add('modal-active');
+    overlay.classList.add('overlay-active');
+}
+
+const closeModal = () => {
+    modal.classList.remove('modal-active');
+    overlay.classList.remove('overlay-active');
+}
+addButton.addEventListener('click',openModal);
+overlay.addEventListener('click', closeModal);
+window.addEventListener('keydown', (key) => {
+    if(key.key === "Escape"){
+        closeModal();
+    }
+});
 
 let myLibrary = [];
 
@@ -30,10 +49,15 @@ const getInfoFromInputs = (event) => {
     let titleValue = bookTitle.value;
     let authorValue = bookAuthor.value;
     let pagesValue = parseInt(bookPages.value);
+    if(titleValue || authorValue || pagesValue){
+        addBookToLibrary(titleValue,authorValue,pagesValue);
+        renderBooks();
+        clearInputFields();
+        closeModal();
+    }else{
+        alert('flii the fields');
+    }
 
-    addBookToLibrary(titleValue,authorValue,pagesValue);
-    renderBooks();
-    clearInputFields();
 }
 
 const renderBooks = () => {
@@ -65,9 +89,7 @@ const renderBooks = () => {
     })
 }
 const clearInputFields = () => {
-    bookTitle.value = '';
-    bookAuthor.value = '';
-    bookPagesInput.value = '';
+    bookForm.reset();
 }
 
 const saveLibraryToLocalStorage = () => {
@@ -80,6 +102,7 @@ const loadLibraryFromLocalStorage = () => {
       renderBooks();
     }
 }
-bookForm.addEventListener('submit', getInfoFromInputs);
+
+bookForm.addEventListener('submit',getInfoFromInputs);
 window.addEventListener('load', loadLibraryFromLocalStorage);
 console.log(myLibrary);
