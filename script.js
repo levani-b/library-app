@@ -23,15 +23,16 @@ window.addEventListener('keydown', (key) => {
 let myLibrary = [];
 
 class Book {
-  constructor(title, author,pages){
+  constructor(title,author,pages,isRead){
     this.title = title;
     this.author = author;
     this.pages = pages;
+    this.isRead = isRead;
   }
 }
 
-const addBookToLibrary = (title,author,pages) =>{
-  const newBook = new Book(title,author,pages);
+const addBookToLibrary = (title,author,pages,isRead) =>{
+  const newBook = new Book(title,author,pages,isRead);
    myLibrary.push(newBook);
    saveLibraryToLocalStorage();
 }
@@ -39,6 +40,7 @@ const addBookToLibrary = (title,author,pages) =>{
 const bookTitle = document.getElementById('title');
 const bookAuthor = document.getElementById('author');
 const bookPages = document.getElementById('pages');
+const checkBox = document.getElementById('is-read');
 const submitBtn = document.getElementById('submit-btn');
 const bookForm = document.getElementById('add-book-form');
 const bookContainer = document.getElementById('books-container');
@@ -49,8 +51,15 @@ const getInfoFromInputs = (event) => {
     let titleValue = bookTitle.value;
     let authorValue = bookAuthor.value;
     let pagesValue = parseInt(bookPages.value);
+    let isReadValue = checkBox.checked;
+
+    if(isReadValue){
+        isReadValue = true;
+    }else{
+        isReadValue = false;
+    }
     if(titleValue || authorValue || pagesValue){
-        addBookToLibrary(titleValue,authorValue,pagesValue);
+        addBookToLibrary(titleValue,authorValue,pagesValue,isReadValue);
         renderBooks();
         clearInputFields();
         closeModal();
@@ -63,12 +72,12 @@ const getInfoFromInputs = (event) => {
 const renderBooks = () => {
     bookContainer.innerHTML = '';
 
-    myLibrary.forEach(book => {
+    myLibrary.forEach((book) => {
         const bookElement = document.createElement('div');
         bookElement.classList.add('book');
 
         const titleOutput = document.createElement('p');
-        titleOutput.textContent = `Title : ${book.title}`;
+        titleOutput.textContent = `Title : '${book.title}'`;
         titleOutput.classList.add('title');
 
         const authorOutput = document.createElement('p');
@@ -76,18 +85,42 @@ const renderBooks = () => {
         authorOutput.classList.add('author');
 
 
-        const pagesOutput = document.createElement('p')
+        const pagesOutput = document.createElement('p');
         pagesOutput.textContent = `Pages : ${book.pages}`
         pagesOutput.classList.add('pages');
+
+        const readBtn = document.createElement('button');
+        readBtn.classList.add('btn');
 
 
         bookElement.appendChild(titleOutput);
         bookElement.appendChild(authorOutput);
         bookElement.appendChild(pagesOutput);
+        bookElement.appendChild(readBtn);
+        
+        updateButtonColor(readBtn, book);
+        readBtn.addEventListener('click', () => {
+            book.isRead = !book.isRead;
+            updateButtonColor(readBtn, book);
+            saveLibraryToLocalStorage(); 
+        });
 
         bookContainer.appendChild(bookElement);
     })
 }
+
+const updateButtonColor = (button, book) => {
+    if (book.isRead) {
+      button.textContent = 'Read';
+      button.classList.remove('btn-red');
+      button.classList.add('btn-green');
+    } else {
+      button.textContent = 'Not Read';
+      button.classList.remove('btn-green');
+      button.classList.add('btn-red');
+    }
+  }
+
 const clearInputFields = () => {
     bookForm.reset();
 }
@@ -105,4 +138,3 @@ const loadLibraryFromLocalStorage = () => {
 
 bookForm.addEventListener('submit',getInfoFromInputs);
 window.addEventListener('load', loadLibraryFromLocalStorage);
-console.log(myLibrary);
