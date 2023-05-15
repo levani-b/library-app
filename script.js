@@ -1,22 +1,43 @@
 let myLibrary = [];
 
 class Book {
-    constructor(
-        title = 'Unknown', 
-        author = 'Unknown', 
-        pages = '0', 
-        isRead = false)
-        {
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.isRead = isRead;
-    }
+  constructor(title, author){
+    this.title = title;
+    this.author = author;
+  }
 }
 
-function addBookToLibrary() {
-    myLibrary.push(Book);
+const addBookToLibrary = (title,author) =>{
+  const newBook = new Book(title,author);
+   myLibrary.push(newBook);
 }
 
+const bookTitle = document.getElementById('title');
+const bookAuthor = document.getElementById('author');
+const submitBtn = document.getElementById('submit-btn');
+const bookContainer = document.getElementById('books-container');
+
+const getInfoFromInputs = (event) => {
+    event.preventDefault();
+
+    let titleValue = bookTitle.value;
+    let authorValue = bookAuthor.value;
+
+    addBookToLibrary(titleValue,authorValue);
+    makeElements(titleValue, authorValue);
+}
+
+const makeElements = (title, author) => {
+    const titleOutput = document.createElement('p');
+    const authorOutput = document.createElement('p');
+
+    titleOutput.textContent = title;
+    authorOutput.textContent = author;
 
 
+    bookContainer.appendChild(titleOutput);
+    bookContainer.appendChild(authorOutput);
+}
+
+submitBtn.addEventListener('click', getInfoFromInputs);
+console.log(myLibrary);
