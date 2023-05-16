@@ -3,6 +3,7 @@ const addButton = document.getElementById('btn-add');
 const modal = document.getElementById('add-book-modal');
 const overlay = document.getElementById('overlay');
 
+
 const openModal = () => {
     modal.classList.add('modal-active');
     overlay.classList.add('overlay-active');
@@ -13,10 +14,14 @@ const closeModal = () => {
     overlay.classList.remove('overlay-active');
 }
 addButton.addEventListener('click',openModal);
-overlay.addEventListener('click', closeModal);
+overlay.addEventListener('click',()=>{
+    closeModal();
+    deleteModalClose();
+} );
 window.addEventListener('keydown', (key) => {
     if(key.key === "Escape"){
         closeModal();
+        deleteModalClose();
     }
 });
 
@@ -177,6 +182,9 @@ const deleteBook = (index) => {
 
 //clear all
 const deleteAllBtn = document.getElementById('delete-all');
+const deleteModal = document.getElementById('modal-for-delete');
+const yesBtn = document.getElementById('btn-y');
+const noBtn = document.getElementById('btn-n');
 
 const deleteAll = () => {
     myLibrary.splice(0,myLibrary.length);
@@ -185,7 +193,22 @@ const deleteAll = () => {
     updateBookCounts();
 }
 
-deleteAllBtn.addEventListener('click', deleteAll);
+const deleteModalOpen = () => {
+    deleteModal.classList.add('modal-active');
+    overlay.classList.add('overlay-active');
+}
+const deleteModalClose = () => {
+    deleteModal.classList.remove('modal-active');
+    overlay.classList.remove('overlay-active');
+}
+noBtn.addEventListener('click',deleteModalClose);
+deleteAllBtn.addEventListener('click', ()=>{
+    deleteModalOpen();
+});
+yesBtn.addEventListener('click',()=>{
+    deleteAll();
+    deleteModalClose();
+});
 
 bookForm.addEventListener('submit',getInfoFromInputs);
 window.addEventListener('load',()=>{

@@ -46,8 +46,6 @@ h1{
 main{
     display: flex;
     flex-direction: column;
-
-
 }
 
 .btn{
@@ -186,8 +184,7 @@ h3{
     align-self: center;
 }
 .modal-active{
-    transform: translate(-50%, -50%) scale(1);
-    
+    transform: translate(-50%, -50%) scale(1); 
 }
 .overlay{
     display: none;
@@ -210,3 +207,47 @@ h3{
     color: #1a1a1a;
 }
 
+.modal-delete{
+    background-color: #eaeaea;
+    position: fixed;
+    padding: 4rem 6rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 1rem;
+    z-index: 1;
+    transition: all 0.1s;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.modal-active{
+    transform: translate(-50%, -50%) scale(1);
+}
+.modal-delete p {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+.modal-delete div{
+    display: flex;
+    gap: 1rem;
+}
+.btn-ans{
+    text-transform: inherit;
+    font-weight: inherit;
+    font-size: 1.4rem;
+    padding: 1.2rem 0;
+    width:8rem;
+    border: none;
+    border-radius: 1rem;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn-yes{
+    background-color: #ff4d4d;
+}
+.btn-no{
+    background-color: #4da64d;
+}
