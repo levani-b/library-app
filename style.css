@@ -17,11 +17,28 @@ body{
 header{
     padding: 3rem 5rem;
     background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.remove-all-btn{
+    font-weight: 700;
+}
+.remove-all-btn:hover{
+    background-color: #d1d1d1;
 }
 .head-cont{
     display: flex;
     align-items: center;
     gap: 1.4rem;
+}
+.books-count{
+    display: flex;
+    align-items: center;
+    gap: 8rem;
+}
+.books-count p {
+    font-size: 1.6rem;
 }
 h1{
     font-size: 3.2rem;

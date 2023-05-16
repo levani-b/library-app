@@ -45,6 +45,11 @@ const submitBtn = document.getElementById('submit-btn');
 const bookForm = document.getElementById('add-book-form');
 const bookContainer = document.getElementById('books-container');
 
+//Count Books
+let booksRead = document.getElementById('books-read');
+let booksNotRead = document.getElementById('books-not-read');
+let totalBooks = document.getElementById('total-books');
+
 const getInfoFromInputs = (event) => {
     event.preventDefault();
 
@@ -71,6 +76,9 @@ const getInfoFromInputs = (event) => {
 
 const renderBooks = () => {
     bookContainer.innerHTML = '';
+
+    let booksReadCount = 0;
+    let booksNotReadCount = 0;
 
     myLibrary.forEach((book,index) => {
         const bookElement = document.createElement('div');
@@ -111,10 +119,24 @@ const renderBooks = () => {
             book.isRead = !book.isRead;
             updateButtonColor(readBtn, book);
             saveLibraryToLocalStorage(); 
+
+            if(book.isRead){
+
+            }
         });
 
+        if (book.isRead) {
+            booksReadCount++;
+        } else {
+            booksNotReadCount++;
+        }
+
         bookContainer.appendChild(bookElement);
-    })
+    });
+
+    booksRead.textContent = `Books Read: ${booksReadCount}`;
+    booksNotRead.textContent = `Books Not Read: ${booksNotReadCount}`;
+    totalBooks.textContent = `Total Books: ${myLibrary.length}`;
 }
 
 const updateButtonColor = (button, book) => {
@@ -148,6 +170,7 @@ const deleteBook = (index) => {
     saveLibraryToLocalStorage(); 
     renderBooks();
 }
+
 
 bookForm.addEventListener('submit',getInfoFromInputs);
 window.addEventListener('load', loadLibraryFromLocalStorage);
