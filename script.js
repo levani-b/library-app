@@ -45,10 +45,6 @@ const submitBtn = document.getElementById('submit-btn');
 const bookForm = document.getElementById('add-book-form');
 const bookContainer = document.getElementById('books-container');
 
-//Count Books
-let booksRead = document.getElementById('books-read');
-let booksNotRead = document.getElementById('books-not-read');
-let totalBooks = document.getElementById('total-books');
 
 const getInfoFromInputs = (event) => {
     event.preventDefault();
@@ -67,6 +63,7 @@ const getInfoFromInputs = (event) => {
         addBookToLibrary(titleValue,authorValue,pagesValue,isReadValue);
         renderBooks();
         clearInputFields();
+        updateBookCounts();
         closeModal();
     }else{
         alert('flii the fields');
@@ -77,10 +74,7 @@ const getInfoFromInputs = (event) => {
 const renderBooks = () => {
     bookContainer.innerHTML = '';
 
-    let booksReadCount = 0;
-    let booksNotReadCount = 0;
-
-    myLibrary.forEach((book,index) => {
+        myLibrary.forEach((book,index) => {
         const bookElement = document.createElement('div');
         bookElement.classList.add('book');
 
@@ -119,25 +113,34 @@ const renderBooks = () => {
             book.isRead = !book.isRead;
             updateButtonColor(readBtn, book);
             saveLibraryToLocalStorage(); 
-
-            if(book.isRead){
-
-            }
+            updateBookCounts();
         });
 
+
+        bookContainer.appendChild(bookElement);
+    });
+};
+
+//Count Books
+let booksRead = document.getElementById('books-read');
+let booksNotRead = document.getElementById('books-not-read');
+let totalBooks = document.getElementById('total-books');
+
+const updateBookCounts = () =>{
+    let booksReadCount = 0;
+    let booksNotReadCount = 0;
+
+    myLibrary.forEach(book => {
         if (book.isRead) {
             booksReadCount++;
         } else {
             booksNotReadCount++;
         }
-
-        bookContainer.appendChild(bookElement);
     });
-
     booksRead.textContent = `Books Read: ${booksReadCount}`;
     booksNotRead.textContent = `Books Not Read: ${booksNotReadCount}`;
     totalBooks.textContent = `Total Books: ${myLibrary.length}`;
-}
+};
 
 const updateButtonColor = (button, book) => {
     if (book.isRead) {
@@ -149,15 +152,15 @@ const updateButtonColor = (button, book) => {
       button.classList.remove('btn-green');
       button.classList.add('btn-red');
     }
-  }
+};
 
 const clearInputFields = () => {
     bookForm.reset();
-}
+};
 
 const saveLibraryToLocalStorage = () => {
   localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
-}
+};
 const loadLibraryFromLocalStorage = () => {
     const libraryData = localStorage.getItem('myLibrary');
     if (libraryData) {
@@ -169,8 +172,23 @@ const deleteBook = (index) => {
     myLibrary.splice(index, 1);
     saveLibraryToLocalStorage(); 
     renderBooks();
+    updateBookCounts();
 }
 
+//clear all
+const deleteAllBtn = document.getElementById('delete-all');
+
+const deleteAll = () => {
+    myLibrary.splice(0,myLibrary.length);
+    saveLibraryToLocalStorage(); 
+    renderBooks();
+    updateBookCounts();
+}
+
+deleteAllBtn.addEventListener('click', deleteAll);
 
 bookForm.addEventListener('submit',getInfoFromInputs);
-window.addEventListener('load', loadLibraryFromLocalStorage);
+window.addEventListener('load',()=>{
+    loadLibraryFromLocalStorage();
+    updateBookCounts(); 
+});
