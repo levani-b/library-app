@@ -17,11 +17,15 @@ addButton.addEventListener('click',openModal);
 overlay.addEventListener('click',()=>{
     closeModal();
     deleteModalClose();
+    bookForm.reset();
+    errorMsg.style.visibility = "hidden";
 } );
 window.addEventListener('keydown', (key) => {
     if(key.key === "Escape"){
         closeModal();
         deleteModalClose();
+        bookForm.reset();
+        errorMsg.style.visibility = "hidden";
     }
 });
 
@@ -49,6 +53,7 @@ const checkBox = document.getElementById('is-read');
 const submitBtn = document.getElementById('submit-btn');
 const bookForm = document.getElementById('add-book-form');
 const bookContainer = document.getElementById('books-container');
+const errorMsg = document.querySelector('.error');
 
 
 const getInfoFromInputs = (event) => {
@@ -58,7 +63,7 @@ const getInfoFromInputs = (event) => {
     let authorValue = bookAuthor.value;
     let pagesValue = parseInt(bookPages.value);
     let isReadValue = checkBox.checked;
-    const errorMsg = document.querySelector('.error');
+    
     if(isReadValue){
         isReadValue = true;
     }else{
@@ -86,11 +91,11 @@ const renderBooks = () => {
         bookElement.classList.add('book');
 
         const titleOutput = document.createElement('p');
-        titleOutput.textContent = `Title : '${book.title}'`;
+        titleOutput.textContent = `${book.title}`;
         titleOutput.classList.add('title');
 
         const authorOutput = document.createElement('p');
-        authorOutput.textContent = `Author : ${book.author}`
+        authorOutput.textContent = `by ${book.author}`
         authorOutput.classList.add('author');
 
 
@@ -99,7 +104,7 @@ const renderBooks = () => {
         pagesOutput.classList.add('pages');
 
         const readBtn = document.createElement('button');
-        readBtn.classList.add('btn');
+        readBtn.classList.add('btn','read-btn');
 
         const deleteBtn =document.createElement('button');
         deleteBtn.classList.add('btn', 'remove-btn');
@@ -108,13 +113,20 @@ const renderBooks = () => {
         deleteBtn.addEventListener('click', ()=> {
             deleteBook(index);
         });
+        const line = document.createElement('div');
+        line.classList.add('line-el');
+
+        const bookElBtnDiv = document.createElement('div');
+        bookElBtnDiv.classList.add('btn-container');
 
         bookElement.appendChild(titleOutput);
         bookElement.appendChild(authorOutput);
         bookElement.appendChild(pagesOutput);
-        bookElement.appendChild(readBtn);
-        bookElement.appendChild(deleteBtn);
-        
+        bookElement.appendChild(line);
+        bookElement.appendChild(bookElBtnDiv);
+        bookElBtnDiv.appendChild(readBtn);
+        bookElBtnDiv.appendChild(deleteBtn);
+
         updateButtonColor(readBtn, book);
         readBtn.addEventListener('click', () => {
             book.isRead = !book.isRead;
