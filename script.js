@@ -58,22 +58,24 @@ const getInfoFromInputs = (event) => {
     let authorValue = bookAuthor.value;
     let pagesValue = parseInt(bookPages.value);
     let isReadValue = checkBox.checked;
-
+    const errorMsg = document.querySelector('.error');
     if(isReadValue){
         isReadValue = true;
     }else{
         isReadValue = false;
     }
-    if(titleValue || authorValue || pagesValue){
+
+    if(titleValue.trim()=='' || authorValue.trim()=='' || pagesValue <= 0 || isNaN(pagesValue)){
+        errorMsg.style.visibility = "visible";
+        return;
+    }else{
+        errorMsg.style.visibility = "hidden";
         addBookToLibrary(titleValue,authorValue,pagesValue,isReadValue);
         renderBooks();
         clearInputFields();
         updateBookCounts();
         closeModal();
-    }else{
-        alert('flii the fields');
     }
-
 }
 
 const renderBooks = () => {
@@ -210,7 +212,7 @@ yesBtn.addEventListener('click',()=>{
     deleteModalClose();
 });
 
-bookForm.addEventListener('submit',getInfoFromInputs);
+submitBtn.addEventListener('click',getInfoFromInputs);
 window.addEventListener('load',()=>{
     loadLibraryFromLocalStorage();
     updateBookCounts(); 
