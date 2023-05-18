@@ -19,4 +19,4 @@ A Book Library App built with HTML, CSS, and JavaScript. The app allows users to
 5. To mark a book as read or not read, click the corresponding button next to the book.
 6. To remove a book from the library, click the "Remove" button next to the book.
 7. The counts for books read, books not read, and total books will update automatically.
-8. 
+8. To delete all books in the library, click the "Delete All" button and confirm the action in the modal window.
