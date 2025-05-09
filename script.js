@@ -44,9 +44,44 @@ function renderBooksToPage(library) {
   });
 }
 
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, true);
-addBookToLibrary("1984", "George Orwell", 328, false);
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, true);
-addBookToLibrary("1984", "George Orwell", 328, false);
+function handleNewBookSubmit(e) {
+  e.preventDefault();
+  const titleInput = document.getElementById("title");
+  const authorInput = document.getElementById("author");
+  const pagesInput = document.getElementById("pages");
+  const readCheckbox = document.getElementById("read-status");
 
-renderBooksToPage(myLibrary);
+  let hasError = false;
+
+  [titleInput, authorInput, pagesInput].forEach((input) => {
+    input.style.border = "";
+  });
+
+  if (titleInput.value.trim() === "") {
+    titleInput.style.border = "2px solid red";
+    hasError = true;
+  }
+  if (authorInput.value.trim() === "") {
+    authorInput.style.border = "2px solid red";
+    hasError = true;
+  }
+  if (pagesInput.value.trim() === "") {
+    pagesInput.style.border = "2px solid red";
+    hasError = true;
+  }
+
+  if (hasError) return;
+
+  addBookToLibrary(
+    titleInput.value.trim(),
+    authorInput.value.trim(),
+    Number(pagesInput.value),
+    readCheckbox.checked
+  );
+
+  renderBooksToPage(myLibrary);
+
+  e.target.reset();
+}
+
+document.querySelector(".form").addEventListener("submit", handleNewBookSubmit);
