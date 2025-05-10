@@ -34,6 +34,11 @@ function renderBooksToPage(library) {
 
     const isRead = document.createElement("div");
     isRead.textContent = `Read: ${book.isRead ? "Yes" : "No"}`;
+    isRead.classList.add("is-read");
+
+    isRead.addEventListener("click", () => {
+      toggleReadStatus(book.id);
+    });
 
     bookCard.appendChild(title);
     bookCard.appendChild(author);
@@ -84,4 +89,11 @@ function handleNewBookSubmit(e) {
   e.target.reset();
 }
 
+function toggleReadStatus(bookId) {
+  const bookIndex = myLibrary.findIndex((book) => book.id === bookId);
+  if (bookIndex !== -1) {
+    myLibrary[bookIndex].isRead = !myLibrary[bookIndex].isRead;
+    renderBooksToPage(myLibrary);
+  }
+}
 document.querySelector(".form").addEventListener("submit", handleNewBookSubmit);
