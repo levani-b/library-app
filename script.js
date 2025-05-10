@@ -54,6 +54,8 @@ function renderBooksToPage(library) {
 
     libraryContainer.appendChild(bookCard);
   });
+
+  updateStatistics();
 }
 
 function handleNewBookSubmit(e) {
@@ -117,6 +119,17 @@ function deleteAllBooks(library) {
   renderBooksToPage(myLibrary);
 }
 
+function updateStatistics() {
+  const totalBooks = myLibrary.length;
+  const totalPages = myLibrary.reduce((sum, book) => sum + book.pages, 0);
+  const readBooks = myLibrary.filter((book) => book.isRead).length;
+  const unreadBooks = totalBooks - readBooks;
+
+  document.getElementById("total-books").textContent = totalBooks;
+  document.getElementById("total-pages").textContent = totalPages;
+  document.getElementById("read-books").textContent = readBooks;
+  document.getElementById("unread-books").textContent = unreadBooks;
+}
 function main() {
   document
     .querySelector(".form")
