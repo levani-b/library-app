@@ -36,14 +36,21 @@ function renderBooksToPage(library) {
     isRead.textContent = `Read: ${book.isRead ? "Yes" : "No"}`;
     isRead.classList.add("is-read");
 
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "remove book";
+    removeBtn.classList.add("delete-btn");
+
     isRead.addEventListener("click", () => {
       toggleReadStatus(book.id);
     });
+
+    removeBtn.addEventListener("click", () => removeBook(book.id));
 
     bookCard.appendChild(title);
     bookCard.appendChild(author);
     bookCard.appendChild(pages);
     bookCard.appendChild(isRead);
+    bookCard.appendChild(removeBtn);
 
     libraryContainer.appendChild(bookCard);
   });
@@ -93,6 +100,14 @@ function toggleReadStatus(bookId) {
   const bookIndex = myLibrary.findIndex((book) => book.id === bookId);
   if (bookIndex !== -1) {
     myLibrary[bookIndex].isRead = !myLibrary[bookIndex].isRead;
+    renderBooksToPage(myLibrary);
+  }
+}
+
+function removeBook(bookId) {
+  const bookIndex = myLibrary.findIndex((book) => book.id === bookId);
+  if (bookIndex !== -1) {
+    myLibrary.splice(bookIndex, 1);
     renderBooksToPage(myLibrary);
   }
 }
