@@ -111,4 +111,19 @@ function removeBook(bookId) {
     renderBooksToPage(myLibrary);
   }
 }
-document.querySelector(".form").addEventListener("submit", handleNewBookSubmit);
+
+function deleteAllBooks(library) {
+  library.splice(0, library.length);
+  renderBooksToPage(myLibrary);
+}
+
+function main() {
+  document
+    .querySelector(".form")
+    .addEventListener("submit", handleNewBookSubmit);
+  document.querySelector(".delete-all").addEventListener("click", () => {
+    deleteAllBooks(myLibrary);
+  });
+}
+
+main();
