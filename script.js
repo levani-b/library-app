@@ -13,6 +13,7 @@ class Book {
 function addBookToLibrary(title, author, pages, isRead) {
   const newBook = new Book(title, author, pages, isRead);
   myLibrary.push(newBook);
+  saveLibrary();
 }
 
 function renderBooksToPage(library) {
@@ -102,6 +103,7 @@ function toggleReadStatus(bookId) {
   const bookIndex = myLibrary.findIndex((book) => book.id === bookId);
   if (bookIndex !== -1) {
     myLibrary[bookIndex].isRead = !myLibrary[bookIndex].isRead;
+    saveLibrary();
     renderBooksToPage(myLibrary);
   }
 }
@@ -110,12 +112,14 @@ function removeBook(bookId) {
   const bookIndex = myLibrary.findIndex((book) => book.id === bookId);
   if (bookIndex !== -1) {
     myLibrary.splice(bookIndex, 1);
+    saveLibrary();
     renderBooksToPage(myLibrary);
   }
 }
 
 function deleteAllBooks(library) {
   library.splice(0, library.length);
+  saveLibrary();
   renderBooksToPage(myLibrary);
 }
 
@@ -130,7 +134,28 @@ function updateStatistics() {
   document.getElementById("read-books").textContent = readBooks;
   document.getElementById("unread-books").textContent = unreadBooks;
 }
+
+function saveLibrary() {
+  localStorage.setItem("library", JSON.stringify(myLibrary));
+}
+
+function loadLibrary() {
+  const data = localStorage.getItem("library");
+  if (data) {
+    const parsed = JSON.parse(data);
+    myLibrary.length = 0;
+    parsed.forEach((book) => {
+      myLibrary.push(
+        new Book(book.title, book.author, book.pages, book.isRead)
+      );
+    });
+  }
+}
+
 function main() {
+  loadLibrary();
+  renderBooksToPage(myLibrary);
+
   document
     .querySelector(".form")
     .addEventListener("submit", handleNewBookSubmit);
