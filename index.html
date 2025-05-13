@@ -9,22 +9,32 @@
     <title>Library</title>
   </head>
   <body>
-    <form class="form">
-      <input type="text" id="title" placeholder="title" />
-      <input type="text" id="author" placeholder="author" />
-      <input type="number" id="pages" placeholder="pages" />
-      <label for="read-status">read status</label>
-      <input type="checkbox" id="read-status" />
-      <input type="submit" id="submit" value="add new" />
-    </form>
-    <div><button class="delete-all">delete all</button></div>
-    <div class="statistics">
-      <p>Total Books: <span id="total-books">0</span></p>
-      <p>Total Pages: <span id="total-pages">0</span></p>
-      <p>Read Books: <span id="read-books">0</span></p>
-      <p>Unread Books: <span id="unread-books">0</span></p>
-    </div>
-    <div class="library"></div>
+    <header class="header">
+      <div class="container">
+        <h1>Library</h1>
+        <div class="statistics">
+          <p>Total Books: <span id="total-books">0</span></p>
+          <p>Total Pages: <span id="total-pages">0</span></p>
+          <p>Read Books: <span id="read-books">0</span></p>
+          <p>Unread Books: <span id="unread-books">0</span></p>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="d">
+        <form class="form">
+          <input type="text" id="title" placeholder="title" />
+          <input type="text" id="author" placeholder="author" />
+          <input type="number" id="pages" placeholder="pages" />
+          <label for="read-status">read status</label>
+          <input type="checkbox" id="read-status" />
+          <input type="submit" id="submit" value="add new" />
+        </form>
+        <div><button class="delete-all">delete all</button></div>
+
+        <div class="library"></div>
+      </div>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>

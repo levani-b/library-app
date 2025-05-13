@@ -1,3 +1,23 @@
-.book-card {
-  border: 1px solid black;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+main {
+  width: 1440px;
+  margin: 0 auto;
+}
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.container {
+  max-width: 120rem;
+  padding: 2rem;
+  margin: 0 auto;
 }
