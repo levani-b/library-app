@@ -25,14 +25,19 @@ function renderBooksToPage(library) {
     bookCard.classList.add("book-card");
 
     const title = document.createElement("p");
-    title.textContent = `Title: ${book.title}`;
+    const titleText = `Title: ${book.title}`;
+    title.textContent = titleText;
     title.classList.add("title");
+    title.setAttribute('title', titleText);
 
     const author = document.createElement("p");
-    author.textContent = `Author: ${book.author}`;
+    const authorText = `Author: ${book.author}`;
+    author.textContent = authorText;
+    author.setAttribute('title', authorText);
 
     const pages = document.createElement("p");
-    pages.textContent = `Pages: ${book.pages}`;
+    const pagesText = `Pages: ${book.pages}`;
+    pages.textContent = pagesText;
 
     const isRead = document.createElement("div");
     isRead.textContent = `Read: ${book.isRead ? "Yes" : "No"}`;
