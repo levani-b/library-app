@@ -60,6 +60,16 @@ function renderBooksToPage(library) {
   updateStatistics();
 }
 
+function openModal() {
+  const modal = document.getElementById("book-modal");
+  modal.style.display = "block";
+}
+
+function closeModal() {
+  const modal = document.getElementById("book-modal");
+  modal.style.display = "none";
+}
+
 function handleNewBookSubmit(e) {
   e.preventDefault();
   const titleInput = document.getElementById("title");
@@ -96,7 +106,7 @@ function handleNewBookSubmit(e) {
   );
 
   renderBooksToPage(myLibrary);
-
+  closeModal();
   e.target.reset();
 }
 
@@ -156,6 +166,16 @@ function loadLibrary() {
 function main() {
   loadLibrary();
   renderBooksToPage(myLibrary);
+
+  
+  document.getElementById("new-book-btn").addEventListener("click", openModal);
+  document.querySelector(".close").addEventListener("click", closeModal);
+  window.addEventListener("click", (e) => {
+    const modal = document.getElementById("book-modal");
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
 
   document
     .querySelector(".form")

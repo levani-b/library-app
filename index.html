@@ -21,16 +21,35 @@
       </div>
     </header>
     <main>
-      <div class="d">
-        <form class="form">
-          <input type="text" id="title" placeholder="title" />
-          <input type="text" id="author" placeholder="author" />
-          <input type="number" id="pages" placeholder="pages" />
-          <label for="read-status">read status</label>
-          <input type="checkbox" id="read-status" />
-          <input type="submit" id="submit" value="add new" />
-        </form>
-        <div><button class="delete-all">delete all</button></div>
+      <div class="container">
+        <div class="actions">
+          <button id="new-book-btn" class="btn btn-primary">Add New Book</button>
+          <button class="delete-all btn btn-danger">Delete All</button>
+        </div>
+
+        
+        <div id="book-modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add New Book</h2>
+            <form class="form">
+              <div class="form-group">
+                <input type="text" id="title" placeholder="Title" />
+              </div>
+              <div class="form-group">
+                <input type="text" id="author" placeholder="Author" />
+              </div>
+              <div class="form-group">
+                <input type="number" id="pages" placeholder="Pages" />
+              </div>
+              <div class="form-group checkbox-group">
+                <label for="read-status">Have you read it?</label>
+                <input type="checkbox" id="read-status" />
+              </div>
+              <button type="submit" class="btn btn-primary">Add Book</button>
+            </form>
+          </div>
+        </div>
 
         <div class="library"></div>
       </div>
