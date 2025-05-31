@@ -1,4 +1,4 @@
-# Library App [Live Demo](library-app-levanib.vercel.app)
+# [Library App](library-app-levanib.vercel.app)
 
 A personal library tracker built as part of my JavaScript learning journey. This project reinforced my understanding of core JavaScript concepts through practical implementation.
 
