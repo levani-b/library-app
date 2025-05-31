@@ -1,5 +1,3 @@
-const myLibrary = [];
-
 class Book {
   constructor(title, author, pages, isRead) {
     this.id = crypto.randomUUID();
@@ -9,6 +7,11 @@ class Book {
     this.isRead = isRead;
   }
 }
+
+const myLibrary = [
+  new Book("The Hobbit", "J.R.R. Tolkien", 295, true),
+  new Book("1984", "George Orwell", 328, false)
+];
 
 function addBookToLibrary(title, author, pages, isRead) {
   const newBook = new Book(title, author, pages, isRead);
@@ -42,6 +45,7 @@ function renderBooksToPage(library) {
     const isRead = document.createElement("div");
     isRead.textContent = `Read: ${book.isRead ? "Yes" : "No"}`;
     isRead.classList.add("is-read");
+    isRead.setAttribute('data-read', book.isRead);
 
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "remove book";
